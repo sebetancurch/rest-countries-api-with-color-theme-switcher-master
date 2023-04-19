@@ -2,7 +2,7 @@
 
 import data from "../data/data.json"
 import React, { useState } from "react"
-import '../styles/globals.css'
+import Link from "next/link"
 
 
 function CountryCard(
@@ -17,29 +17,15 @@ function CountryCard(
 
     return (
 
-        <a href="./country-details" style={{
-            borderRadius: "10px",
-            backgroundColor: "white",
-            maxWidth: "15%",
-            minWidth: "15%",
-            height: "300px",
-            textDecoration: "none",
-            color: "black"
-        }}>
-            <div style={{backgroundImage: `url(${flag})`, 
-            backgroundSize: "100%", 
-            backgroundRepeat: "no-repeat", 
-            height: "60%", 
-            borderTopRightRadius: "10px", 
-            borderTopLeftRadius: "10px"}}></div>
-            <div style={{padding: "10px 50px", display: "flex",
-            flexDirection: "column"}}>
+        <Link href={{pathname: `/country-details`, query: {name: name}}} className="rounded-xl bg-white max-w-[15%] min-w-[15%] h-80 no-underline text-black">
+            <div style={{backgroundImage: `url(${flag})`}} className="bg-cover rounded-t-xl bg-no-repeat h-3/5"></div>
+            <div style={{padding: "10px 50px"}} className="flex flex-col">
                 <span>{name}</span>
                 <span>Population: {population}</span>
                 <span>Region: {region}</span>
                 <span>Capital: {capital}</span>
             </div>
-        </a>
+        </Link>
 
     )
 }
@@ -64,7 +50,7 @@ export default function HomePage()  {
     }
 
     return (<>
-        <div className="flex justify-between p-10">
+        <div className="flex justify-between p-2">
             <label htmlFor="search" className="flex flex-col">
                 Search
                 <input type="text" name="search" id="search" placeholder="Search country..." onChange={searchCountry}/>
@@ -80,12 +66,7 @@ export default function HomePage()  {
                 </select>
             </label>
         </div>
-        <div style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "100px",
-            justifyContent: "space-between"
-        }}>
+        <div className="flex flex-wrap gap-2.5 justify-between overflow-auto">
             {countries.map((country) => {
                 return (
                     <CountryCard 

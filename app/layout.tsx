@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMoon
 } from "@fortawesome/free-solid-svg-icons";
+import '../styles/globals.css'
 
 export const metadata = {
   title: 'Next.js',
@@ -15,34 +16,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body style={{
-        margin: "0",
-        height: "100dvh"
-      }}>
-        <div style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "20px",
-          backgroundColor: "white"
-        }}>
+      <body className="m-0 h-screen">
+        <div className="flex justify-between items-center p-10 bg-white">
           <h1>Where in the world?</h1>
-          <div style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
-          }}>
+          <div className="flex items-center gap-2.5">
             <FontAwesomeIcon icon={faMoon} size="2xs"/>
             <span>Dark Mode</span>
           </div>
         </div>
-        <div style={{
+        <div 
+        style={{
           backgroundColor: "hsl(0, 0%, 98%)",
-          borderTopWidth: "3px",
-          borderTopStyle: "solid",
           borderColor: "hsl(0, 0%, 92%)",
-          padding: "20px",
-        }}>
+        }} 
+        className="border-t-4 border-solid p-5">
           {children}
         </div>
       </body>
