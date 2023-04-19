@@ -2,7 +2,13 @@
 
 import data from "../data/data.json"
 import React, { useState } from "react"
+import '../styles/globals.css'
 import Link from "next/link"
+import { InputAdornment, MenuItem, Select, TextField } from "@mui/material"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {
+    faMagnifyingGlass
+} from "@fortawesome/free-solid-svg-icons";
 
 
 function CountryCard(
@@ -17,9 +23,9 @@ function CountryCard(
 
     return (
 
-        <Link href={{pathname: `/country-details`, query: {name: name}}} className="rounded-xl bg-white max-w-[15%] min-w-[15%] h-80 no-underline text-black">
+        <Link href={{pathname: `/country-details`, query: {name: name}}} className="rounded-xl bg-white w-[20%] h-96 no-underline text-black">
             <div style={{backgroundImage: `url(${flag})`}} className="bg-cover rounded-t-xl bg-no-repeat h-3/5"></div>
-            <div style={{padding: "10px 50px"}} className="flex flex-col">
+            <div style={{padding: "10px 50px"}} className="flex flex-col bg-inherit">
                 <span>{name}</span>
                 <span>Population: {population}</span>
                 <span>Region: {region}</span>
@@ -34,8 +40,12 @@ function CountryCard(
 export default function HomePage()  {
 
     const [countries, setCountries] = useState(data)
+    const [region, setRegion] = React.useState('');
+    const [typeCountry, setTypeCountry] = React.useState('');
 
     const searchCountry = (e: any) => {
+
+        setTypeCountry(e.target.value)
 
         const newData = data.filter((country) => country.name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
 
@@ -44,40 +54,60 @@ export default function HomePage()  {
 
     const filterByRegion = (e: any) => {
 
-        const regionCountries = data.filter((country) => country.region === e.target.value)
+        setRegion(e.target.value)
+
+        const regionCountries = data.filter((country) => (country.region === e.target.value && country.name.toLocaleLowerCase().includes(typeCountry.toLocaleLowerCase())))
 
         setCountries(regionCountries)
     }
 
-    return (<>
-        <div className="flex justify-between p-2">
-            <label htmlFor="search" className="flex flex-col">
-                Search
-                <input type="text" name="search" id="search" placeholder="Search country..." onChange={searchCountry}/>
-            </label>
-            <label htmlFor="selectRegion" className="flex flex-col">
-                Filter by region
-                <select name="selectRegion" id="selectRegion" onChange={filterByRegion}>
-                    <option value="Africa">Africa</option>
-                    <option value="Americas">Americas</option>
-                    <option value="Asia">Asia</option>
-                    <option value="Europe">Europe</option>
-                    <option value="Oceania">Oceania</option>
-                </select>
-            </label>
-        </div>
-        <div className="flex flex-wrap gap-2.5 justify-between overflow-auto">
-            {countries.map((country) => {
-                return (
-                    <CountryCard 
-                        name={country.name}
-                        populaiton={country.population}
-                        region={country.region}
-                        flag={country.flags.png}
-                        capital={country.capital} 
-                        key={country.name}/>
-                )
-            })}
-        </div>
-    </>)
+    return (
+        <>
+            <div className="flex justify-between px-20 py-8">
+                <TextField 
+                    type="text" 
+                    name="search" 
+                    id="search" 
+                    placeholder="Search country..." 
+                    value={typeCountry} 
+                    onChange={searchCountry}
+                    InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <FontAwesomeIcon icon={faMagnifyingGlass}/>
+                          </InputAdornment>
+                        ),
+                    }}/>
+                <Select 
+                    sx={{width: 1/8}} 
+                    id="regionFilter" 
+                    value={region} 
+                    label="Filter by region" 
+                    displayEmpty 
+                    inputProps={{ 'aria-label': 'Without label' }} 
+                    onChange={filterByRegion}>
+                        <MenuItem value={"Africa"}>Africa</MenuItem>
+                        <MenuItem value={"Americas"}>Americas</MenuItem>
+                        <MenuItem value={"Asia"}>Asia</MenuItem>
+                        <MenuItem value={"Europe"}>Europe</MenuItem>
+                        <MenuItem value={"Oceania"}>Oceania</MenuItem>
+                </Select>
+            </div>
+            <div className="overflow-y-scroll">
+                <div className="flex flex-wrap gap-2.5 justify-between px-20 h-screen">
+                    {countries.map((country) => {
+                        return (
+                            <CountryCard 
+                                name={country.name}
+                                populaiton={country.population}
+                                region={country.region}
+                                flag={country.flags.png}
+                                capital={country.capital} 
+                                key={country.name}/>
+                        )
+                    })}
+                </div>
+            </div>
+        </>
+    )
 }

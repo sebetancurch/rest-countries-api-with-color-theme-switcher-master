@@ -1,8 +1,6 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faMoon
-} from "@fortawesome/free-solid-svg-icons";
 import '../styles/globals.css'
+import '../styles/fonts.css'
+import Header from './components/header' 
 
 export const metadata = {
   title: 'Next.js',
@@ -16,20 +14,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="m-0 h-screen">
-        <div className="flex justify-between items-center p-10 bg-white">
-          <h1>Where in the world?</h1>
-          <div className="flex items-center gap-2.5">
-            <FontAwesomeIcon icon={faMoon} size="2xs"/>
-            <span>Dark Mode</span>
-          </div>
-        </div>
+      <body style={{fontFamily: "Nunito Sans", backgroundColor: "hsl(0, 0%, 98%)"}} className="h-screen m-0">
+        <Header/>
         <div 
         style={{
           backgroundColor: "hsl(0, 0%, 98%)",
           borderColor: "hsl(0, 0%, 92%)",
         }} 
-        className="border-t-4 border-solid p-5">
+        className="border-t-4 border-solid">
           {children}
         </div>
       </body>
