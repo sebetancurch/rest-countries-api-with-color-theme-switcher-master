@@ -14,15 +14,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body style={{fontFamily: "Nunito Sans", backgroundColor: "hsl(0, 0%, 98%)"}} className="h-screen m-0">
+      <body style={{fontFamily: "Nunito Sans", backgroundColor: "hsl(0, 0%, 98%)"}} className="min-h-screen m-0 overflow-y-auto">
         <Header/>
         <div 
-        style={{
-          backgroundColor: "hsl(0, 0%, 98%)",
-          borderColor: "hsl(0, 0%, 92%)",
-        }} 
-        className="border-t-4 border-solid">
-          {children}
+          style={{
+            backgroundColor: "hsl(0, 0%, 98%)",
+            borderColor: "hsl(0, 0%, 92%)",
+          }} 
+          className="relative border-t-4 border-solid">
+            {children}
         </div>
       </body>
     </html>

@@ -39,7 +39,7 @@ declare module '@mui/material/Button' {
 
 export default function Header() {
     return (
-        <div className="flex justify-between items-center px-20 py-5 bg-white">
+        <div className="sticky top-0 w-full flex justify-between items-center px-20 py-5 bg-white">
           <span className="decoration-solid text-xl font-bold">Where in the world?</span>
           <ThemeProvider theme={theme}>
             <Button 

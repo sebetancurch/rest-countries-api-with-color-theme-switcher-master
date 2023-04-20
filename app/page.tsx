@@ -4,7 +4,7 @@ import data from "../data/data.json"
 import React, { useState } from "react"
 import '../styles/globals.css'
 import Link from "next/link"
-import { InputAdornment, MenuItem, Select, TextField } from "@mui/material"
+import { InputAdornment, InputLabel, MenuItem, Select, TextField } from "@mui/material"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
     faMagnifyingGlass
@@ -63,7 +63,7 @@ export default function HomePage()  {
 
     return (
         <>
-            <div className="flex justify-between px-20 py-8">
+            <div style={{backgroundColor: "hsl(0, 0%, 98%)"}} className="sticky top-0 z-10 w-full flex justify-between px-20 py-8">
                 <TextField 
                     type="text" 
                     name="search" 
@@ -78,35 +78,35 @@ export default function HomePage()  {
                           </InputAdornment>
                         ),
                     }}/>
-                <Select 
-                    sx={{width: 1/8}} 
-                    id="regionFilter" 
-                    value={region} 
-                    label="Filter by region" 
-                    displayEmpty 
-                    inputProps={{ 'aria-label': 'Without label' }} 
-                    onChange={filterByRegion}>
-                        <MenuItem value={"Africa"}>Africa</MenuItem>
-                        <MenuItem value={"Americas"}>Americas</MenuItem>
-                        <MenuItem value={"Asia"}>Asia</MenuItem>
-                        <MenuItem value={"Europe"}>Europe</MenuItem>
-                        <MenuItem value={"Oceania"}>Oceania</MenuItem>
-                </Select>
-            </div>
-            <div className="overflow-y-scroll">
-                <div className="flex flex-wrap gap-2.5 justify-between px-20 h-screen">
-                    {countries.map((country) => {
-                        return (
-                            <CountryCard 
-                                name={country.name}
-                                populaiton={country.population}
-                                region={country.region}
-                                flag={country.flags.png}
-                                capital={country.capital} 
-                                key={country.name}/>
-                        )
-                    })}
+                <div className="flex flex-col">
+                    <InputLabel id="regionFilterLabel">Filter by region</InputLabel>
+                    <Select 
+                        sx={{}} 
+                        id="regionFilter"
+                        labelId="regionFilterLabel"
+                        value={region} 
+                        label="Filter by region"
+                        onChange={filterByRegion}>
+                            <MenuItem value={"Africa"}>Africa</MenuItem>
+                            <MenuItem value={"Americas"}>Americas</MenuItem>
+                            <MenuItem value={"Asia"}>Asia</MenuItem>
+                            <MenuItem value={"Europe"}>Europe</MenuItem>
+                            <MenuItem value={"Oceania"}>Oceania</MenuItem>
+                    </Select>
                 </div>
+            </div>
+            <div className="flex flex-wrap gap-2.5 justify-between px-20">
+                {countries.map((country) => {
+                    return (
+                        <CountryCard 
+                            name={country.name}
+                            populaiton={country.population}
+                            region={country.region}
+                            flag={country.flags.png}
+                            capital={country.capital} 
+                            key={country.name}/>
+                    )
+                })}
             </div>
         </>
     )
