@@ -10,6 +10,12 @@ export default function CountryDetails() {
     const countryName = useSearchParams().get('name')
     const country = data.find((country) => country.name === countryName);
     const router = useRouter()
+    let borderCountries: string[] = []
+    country?.borders?.forEach(element => {
+        borderCountries = [...borderCountries, ...data.filter((country) => country.alpha3Code === element).map((dataCountry) => {
+            return dataCountry.name
+        })]
+    });
 
     return (
         <div style={{backgroundColor: 'hsl(0, 0%, 98%)'}} className="flex justify-center items-center gap-10 mt-20">
@@ -37,20 +43,25 @@ export default function CountryDetails() {
                                 </div>
                                 <div className='flex flex-col'>
                                     <span>Top Level Domain: {country?.topLevelDomain}</span>
-                                    <span>Currencies: {country?.currencies?.map((currency) => {
+                                    <span>Currencies: {country?.currencies?.map((currency, index) => {
                                             return (
-                                                <span key={currency.code}>{currency.name}</span>
+                                                <span key={currency.code}>{ index !== country.currencies.length - 1 ? currency.name + ', '  : currency.name }</span>
                                             )
                                         })}
                                     </span>
                                     
-                                    <span>Languages: {country?.languages?.map((language) => {
+                                    <span>Languages: {country?.languages?.map((language, index) => {
                                             return (
-                                                <span key={language.name}>{language.name}</span>
+                                                <span key={language.name}>{ index !== country.languages.length - 1 ? language.name + ', '  : language.name }</span>
                                             )
                                         })}</span>
                                 </div>
                             </div>
+                            <span>Border countries: {borderCountries.map((border) => {
+                                    return (
+                                        <span className='px-4 mx-2 border-2 rounded border-black border-solid' key={border}>{ border }</span>
+                                    )
+                                })}</span>
                         </div>
                     </div>
                 </div>
