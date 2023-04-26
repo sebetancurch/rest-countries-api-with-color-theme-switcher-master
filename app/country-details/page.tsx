@@ -4,12 +4,15 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import data from "../../data/data.json"
 import { Button } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { IsDarkMode } from '../components/header';
+import { useContext } from 'react'
 
 export default function CountryDetails() {
 
     const countryName = useSearchParams().get('name')
     const country = data.find((country) => country.name === countryName);
     const router = useRouter()
+    const isDark = useContext(IsDarkMode)
     let borderCountries: string[] = []
     country?.borders?.forEach(element => {
         borderCountries = [...borderCountries, ...data.filter((country) => country.alpha3Code === element).map((dataCountry) => {
@@ -18,7 +21,7 @@ export default function CountryDetails() {
     });
 
     return (
-        <div style={{backgroundColor: 'hsl(0, 0%, 98%)'}} className="flex justify-center items-center gap-10 mt-20">
+        <div style={{backgroundColor: isDark ? "hsl(209, 23%, 22%)" : 'hsl(0, 0%, 98%)'}} className="flex justify-center items-center gap-10 mt-20">
             <div className='flex flex-col'>
                 <Button 
                     variant="outlined" 

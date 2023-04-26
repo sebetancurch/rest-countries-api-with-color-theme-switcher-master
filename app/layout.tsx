@@ -1,6 +1,6 @@
 import '../styles/globals.css'
 import '../styles/fonts.css'
-import Header from './components/header' 
+import Home from './components/header'
 
 export const metadata = {
   title: 'Next.js',
@@ -14,17 +14,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body style={{fontFamily: "Nunito Sans", backgroundColor: "hsl(0, 0%, 98%)"}} className="min-h-screen m-0 overflow-y-auto">
-        <Header/>
-        <div 
-          style={{
-            backgroundColor: "hsl(0, 0%, 98%)",
-            borderColor: "hsl(0, 0%, 92%)",
-          }} 
-          className="relative border-t-4 border-solid">
+        <body style={{fontFamily: "Nunito Sans", backgroundColor: "hsl(0, 0%, 98%)"}} className="min-h-screen m-0 overflow-y-auto">
+          <Home>
             {children}
-        </div>
-      </body>
+          </Home>
+        </body>
     </html>
   )
 }
