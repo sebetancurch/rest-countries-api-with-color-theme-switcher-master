@@ -4,8 +4,8 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import data from "../../data/data.json"
 import { Button } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { IsDarkMode } from '../components/header';
-import { useContext } from 'react'
+import { IsDarkMode } from '../components/main';
+import { useContext, useEffect } from 'react'
 
 export default function CountryDetails() {
 
@@ -21,7 +21,7 @@ export default function CountryDetails() {
     });
 
     return (
-        <div style={{backgroundColor: isDark ? "hsl(209, 23%, 22%)" : 'hsl(0, 0%, 98%)'}} className="flex justify-center items-center gap-10 mt-20">
+        <div style={{backgroundColor: isDark ? "hsl(207, 26%, 17%)" : 'hsl(0, 0%, 98%)'}} className="flex justify-center items-center gap-10 pt-20">
             <div className='flex flex-col'>
                 <Button 
                     variant="outlined" 

@@ -1,6 +1,6 @@
 import '../styles/globals.css'
 import '../styles/fonts.css'
-import Home from './components/header'
+import Home from './components/main'
 
 export const metadata = {
   title: 'Next.js',

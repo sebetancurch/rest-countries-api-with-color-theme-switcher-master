@@ -50,7 +50,8 @@ export default function Home ( {children}: {
             backgroundColor: isDark ? "hsl(207, 26%, 17%)" : "hsl(0, 0%, 98%)",
             borderColor: isDark ? "" : "hsl(0, 0%, 92%)",
             borderTop: isDark ? "0" : "4",
-            borderStyle: isDark ? "none" : "solid"
+            borderStyle: isDark ? "none" : "solid", 
+            minHeight: "100dvh"
           }} 
           className="relative">
             {children}
